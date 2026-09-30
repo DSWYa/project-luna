@@ -1,30 +1,9 @@
 # ✅ MISSION 03 COMPLETE
 
-# LUNA LIFE-SUPPORT AUTOMATION: OPERATIONAL
+LUNA-1 now runs Python/Bash station automation. The permanent workflow is:
 
 ```text
-========================================
-             PROJECT LUNA
-========================================
-LUNA-1 ................. ONLINE
-MISSION CONTROL ........ ONLINE
-VERSION CONTROL ........ ONLINE
-PYTHON .................. ONLINE
-TELEMETRY PROCESSOR ..... ONLINE
-AUTOMATED REPORTING ..... ONLINE
-ERROR HANDLING .......... ONLINE
-MISSION 03 .............. COMPLETE
-========================================
+Earth → GitHub → LUNA-1
 ```
 
-You practiced Python, conditions, loops, functions, lists, dictionaries, files, JSON, CSV, exceptions, Bash automation, structured reporting, troubleshooting, and Git-based development.
-
-## Next Problem
-
-Flat files work, but LUNA-1 is accumulating data.
-
-Mission Control needs a proper system for relating telemetry, equipment, crew, incidents, and maintenance.
-
-# MISSION 04 — STATION DATABASE
-
-**Primary skills:** SQL, relational data, PostgreSQL, querying, and data modeling.
+Next: **Mission 04 — Station Database**.

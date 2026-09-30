@@ -1,39 +1,16 @@
 # LAB 04 — ERROR HANDLING
 
-Create a **JSON file** named:
+Perform on **LUNA-1**.
 
-```text
-broken_telemetry.json
-```
-
-Paste:
+Create valid JSON containing good and bad records:
 
 ```json
 [
-  {"module": "HAB-1", "oxygen": 20.8},
-  {"module": "HAB-2", "oxygen": "SENSOR_ERROR"},
-  {"module": "LAB-1", "oxygen": 19.9},
-  {"module": "STORAGE"}
+  {"module":"HAB-1","oxygen":20.8},
+  {"module":"HAB-2","oxygen":"SENSOR_ERROR"},
+  {"module":"LAB-1","oxygen":19.9},
+  {"module":"STORAGE"}
 ]
 ```
 
-Create a **Python file** named:
-
-```text
-safe_processor.py
-```
-
-Requirements:
-
-- Load the JSON.
-- Loop through every record.
-- Retrieve module and oxygen.
-- Convert oxygen to a float.
-- Print valid readings.
-- Catch `KeyError`, `ValueError`, and `TypeError`.
-- Print a useful error message.
-- Continue processing later records.
-
-LAB-1 should still be processed even though HAB-2 is bad.
-
-Extension: count valid and invalid records.
+Build `safe_processor.py` that catches `KeyError`, `ValueError`, and `TypeError`, continues processing, and counts valid/invalid rows.

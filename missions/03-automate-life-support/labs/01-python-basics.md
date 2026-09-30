@@ -1,19 +1,15 @@
 # LAB 01 — PYTHON BASICS
 
-Create a **Python file** named `crew_roster.py` inside `luna-python-training`.
+Perform this lab on **LUNA-1**.
+
+Create `~/luna-python-training/crew_roster.py`.
 
 Requirements:
 
-1. Create a list containing at least four crew names.
-2. Print `LUNA-1 CREW ROSTER`.
-3. Use a `for` loop to print every crew member.
-4. Print the crew count using `len()`.
-5. Ask the user for another crew member with `input()`.
-6. Add that name with `.append()`.
-7. Print the updated roster.
-
-Everything required was introduced in the walkthrough.
-
-## Checkpoint
-
-Explain what a list, `for` loop, `.append()`, and `input()` do.
+- list at least four crew names,
+- print a heading,
+- loop over the list,
+- print `len()` of the list,
+- ask for another name,
+- add it using `.append()`,
+- print the updated roster.

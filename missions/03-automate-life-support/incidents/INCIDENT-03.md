@@ -1,55 +1,33 @@
 # 🚨 INCIDENT INC-003
 
-**PRIORITY:** CRITICAL  
-**SYSTEM:** Life-Support Telemetry Pipeline
+This incident runs on **LUNA-1**.
 
-Mission Control reports that a previously working telemetry processor stopped after a sensor synchronization.
+Update the course repo on Ubuntu:
 
-No code deployment was scheduled.
+```bash
+cd ~/project-luna
+git pull
+```
 
-## Run the Simulator
+Then:
 
-Open Command Prompt and navigate to:
+```bash
+cd ~/project-luna/missions/03-automate-life-support/incidents
+chmod +x trigger-incident.sh
+./trigger-incident.sh
+```
+
+The simulator creates:
 
 ```text
-project-luna\missions\03-automate-life-support\incidents
+~/luna-incident-03
 ```
 
-Run:
+Enter it:
 
-```bat
-trigger-incident.bat
+```bash
+cd ~/luna-incident-03
+python3 processor.py
 ```
 
-It creates a disposable **folder**:
-
-```text
-telemetry-incident-lab
-```
-
-Do not inspect the simulator before solving the incident.
-
-Enter:
-
-```bat
-cd telemetry-incident-lab
-```
-
-Run:
-
-```bat
-python processor.py
-```
-
-## Objective
-
-Determine:
-
-1. What exception occurs.
-2. Which file causes it.
-3. Whether the root cause is code or input data.
-4. The smallest correction required.
-
-Success means `python processor.py` completes and creates `report.txt`.
-
-If stuck after about 15 minutes, open `hint-1.md`.
+Determine whether code or input data failed. Success means `report.txt` is created.

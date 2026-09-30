@@ -1,33 +1,9 @@
 # LAB 03 — JSON AND CSV
 
-## JSON
+Perform on **LUNA-1**.
 
-Create a **file** named `modules.json`.
+Create `modules.json` with at least three module records and `read_modules_json.py` to display them.
 
-Add at least three module records containing:
+Create equivalent `modules.csv` and `read_modules_csv.py`.
 
-- module
-- oxygen
-- temperature
-
-Create a **Python file** named `read_modules_json.py`.
-
-Load the JSON and print each module with its oxygen and temperature.
-
-## CSV
-
-Create a **file** named `modules.csv`.
-
-Represent the same records as rows and columns.
-
-Create a **Python file** named `read_modules_csv.py`.
-
-Read the CSV and print the same information.
-
-Remember: CSV numeric-looking values are initially strings.
-
-## Questions
-
-1. Which format resembles a spreadsheet?
-2. Which maps naturally to Python dictionaries?
-3. Which supports nested structures more naturally?
+Remember: CSV numeric values are strings until converted.
