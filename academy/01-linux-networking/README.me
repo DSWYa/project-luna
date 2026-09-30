@@ -521,3 +521,149 @@ Try the browser or curl.
 Good troubleshooting moves from broad questions toward specific ones.
 
 That methodology will appear throughout Project LUNA.
+
+16. BASIC BASH SCRIPTING
+
+Linux commands can be placed into executable text files called shell scripts.
+
+A basic Bash script:
+
+```bash
+#!/bin/bash
+
+echo "LUNA-1 ONLINE"
+```
+
+The first line:
+
+```bash
+#!/bin/bash
+```
+
+tells Linux to execute the file using Bash.
+
+---
+
+## Comments
+
+```bash
+# This is a comment
+```
+
+---
+
+## Variables
+
+```bash
+station="LUNA-1"
+
+echo "$station"
+```
+
+Do not place spaces around the `=`:
+
+Correct:
+
+```bash
+station="LUNA-1"
+```
+
+Incorrect:
+
+```bash
+station = "LUNA-1"
+```
+
+---
+
+## Command Substitution
+
+Store the result of a command:
+
+```bash
+user=$(whoami)
+```
+
+Then:
+
+```bash
+echo "$user"
+```
+
+You may also place the command directly inside text:
+
+```bash
+echo "Current user: $(whoami)"
+```
+
+---
+
+## Output Redirection
+
+Replace the contents of a file:
+
+```bash
+echo "ONLINE" > status.txt
+```
+
+Append:
+
+```bash
+echo "CHECK COMPLETE" >> status.txt
+```
+
+Redirect another command:
+
+```bash
+df -h >> report.txt
+```
+
+---
+
+## Executable Permission
+
+Give the script execute permission:
+
+```bash
+chmod +x script.sh
+```
+
+Run it:
+
+```bash
+./script.sh
+```
+
+---
+
+## Simple Example
+
+```bash
+#!/bin/bash
+
+station=$(hostname)
+engineer=$(whoami)
+
+echo "=============================="
+echo "PROJECT LUNA"
+echo "=============================="
+echo "Station: $station"
+echo "Engineer: $engineer"
+echo "Date: $(date)"
+echo
+echo "Disk Usage:"
+df -h
+```
+
+Mission 01 only introduces scripting fundamentals.
+
+More advanced scripting concepts such as:
+
+- Conditions
+- Loops
+- Functions
+- Arguments
+- Error handling
+- JSON parsing
+
+will be introduced later.

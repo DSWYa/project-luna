@@ -1,42 +1,72 @@
-# FILE: missions/01-establish-the-outpost/incidents/INCIDENT-01.md
-
 # 🚨 INCIDENT INC-001
 
 **PRIORITY:** HIGH  
-**SYSTEM:** LUNA-1 Command Server  
+**SYSTEM:** LUNA-1  
 **SOURCE:** Earth Mission Control
 
 ---
 
-## Situation
+# INCIDENT SIMULATION
 
-Mission Control has issued a routine systems diagnostic package for LUNA-1.
+Mission Control has deployed an automated diagnostic simulation with the Project LUNA training repository.
 
-The package is designed to simulate an operational event and verify your troubleshooting process.
+The simulator will create a system failure.
 
-You are not expected to know what the script changes.
+You are deliberately **not being told what it changes**.
 
-Your job is to diagnose the system based on the symptoms that appear afterward.
+Your job is to diagnose the resulting symptoms.
 
 ---
 
-# Step 1 — Run the Incident Simulator
+# Update Your Mission Files
 
-From LUNA-1, navigate to the incident folder containing the script:
+SSH into LUNA-1.
+
+Enter your Project LUNA repository:
 
 ```bash
-cd ~/project-luna/missions/01-establish-the-outpost/incidents
+cd ~/project-luna
 ```
 
-If your Project LUNA repository is located somewhere else, navigate to that location instead.
+Retrieve the latest Mission Control files:
 
-Make the script executable:
+```bash
+git pull
+```
+
+Then enter:
+
+```bash
+cd missions/01-establish-the-outpost/incidents
+```
+
+Verify the files:
+
+```bash
+ls
+```
+
+You should see:
+
+```text
+INCIDENT-01.md
+trigger-incident.sh
+hint-1.md
+hint-2.md
+solution.md
+```
+
+---
+
+# Run the Incident Simulator
+
+Give the simulator execute permission:
 
 ```bash
 chmod +x trigger-incident.sh
 ```
 
-Run it:
+Run:
 
 ```bash
 sudo ./trigger-incident.sh
@@ -45,6 +75,15 @@ sudo ./trigger-incident.sh
 You should see:
 
 ```text
+========================================
+      PROJECT LUNA DIAGNOSTIC TOOL
+========================================
+
+Initializing LUNA-1 systems check...
+Checking environmental interfaces...
+Checking communications relay...
+Checking mission services...
+
 Mission Control diagnostic sequence complete.
 
 INCIDENT GENERATED.
@@ -52,92 +91,84 @@ INCIDENT GENERATED.
 Return to Earth Mission Control and begin troubleshooting.
 ```
 
-Do not open the script.
+**Do not open `trigger-incident.sh`.**
 
-Do not inspect its contents.
-
-The goal is to troubleshoot the resulting system behavior.
+Doing so will reveal the failure and defeat the purpose of the exercise.
 
 ---
 
 # Incident Report
 
-At 03:42 UTC, Mission Control lost access to the LUNA-1 status page.
+At 03:42 UTC, Earth Mission Control reports loss of one LUNA-1 service.
 
-The server itself still appears reachable.
-
-Crew systems report no power failure.
-
----
-
-# Reported Symptoms
-
-Mission Control reports:
+Initial automated testing shows:
 
 ```text
+SERVER REACHABLE: YES
+
 PING: SUCCESS
+
 SSH: SUCCESS
-WEB DASHBOARD: FAILED
+
+OPERATIONS PAGE: FAILED
 ```
 
-Attempting to access:
-
-```text
-http://LUNA-1-IP
-```
-
-results in a connection failure.
+Crew systems report no power interruption.
 
 ---
 
-# Your Objective
+# Mission Objective
 
-Restore the LUNA-1 status page.
+Determine:
 
-You may:
+1. What failed.
+2. What remained operational.
+3. The smallest action required to restore service.
 
-- SSH into the server
-- Inspect processes
-- Inspect services
-- Review logs
-- Test network connectivity
-- Restart services
-- Use any command learned during Mission 01
+Restore normal operations.
 
-Do not reinstall software unless your investigation shows that it is actually necessary.
+Do not reboot the server unless your troubleshooting indicates that a reboot is actually necessary.
+
+Do not reinstall software unless your investigation shows that the software itself is damaged.
 
 ---
 
-# Rules
+# Troubleshooting Rules
 
-Try to diagnose the issue systematically.
+Work from known information.
 
-Avoid random changes.
-
-Start with the information you already have:
+Ask:
 
 ```text
-The server responds to ping.
-SSH still works.
-The webpage does not.
+What is definitely working?
+
+What is definitely failing?
+
+What layer does that eliminate?
+
+What should I test next?
 ```
 
-What does that tell you?
+Use the tools learned during Mission 01.
 
 ---
 
-# Success Criteria
+# Success Condition
 
-The incident is resolved when:
+Mission Control must return:
 
 ```text
-PING: SUCCESS
-SSH: SUCCESS
-HTTP: SUCCESS
+PING ........ PASS
+SSH ......... PASS
+HTTP ........ PASS
 ```
 
-and the LUNA-1 status page loads successfully again.
+and the LUNA-1 Operations Node must load again.
 
-If you remain stuck after approximately 15 minutes, open:
+If you remain stuck for approximately 15 minutes:
 
-`hint-1.md`
+Open:
+
+```text
+hint-1.md
+```

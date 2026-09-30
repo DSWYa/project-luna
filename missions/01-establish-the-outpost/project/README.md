@@ -1,182 +1,376 @@
-🛠️ MISSION PROJECT — LUNA-1 COMMAND SERVER
+# 🛠️ MISSION 01 FINAL PROJECT
 
-The guided portion of Mission 01 is complete.
+# LUNA-1 OPERATIONS NODE
 
-From this point forward, you receive requirements rather than exact commands.
+The training portion of Mission 01 is complete.
 
-Use:
+Until now, Mission Control provided exact commands and guided procedures.
 
-Academy documentation
+That ends here.
 
-Previous labs
+You already possess everything required to complete this assignment.
 
-Your notes
+You may use:
 
-Internet documentation
+- Mission 01 Academy documentation
+- Previous labs
+- The Linux/networking cheat sheet
+- Your own notes
 
-man pages
+You should not need to learn an entirely new technology to finish this project.
 
-Search engines
+---
 
-You are allowed to research.
+# Scenario
 
-That is part of the job.
+LUNA-1's command server is online.
 
-Scenario
+Mission Control now needs the server prepared for routine station operations.
 
-Mission Control is preparing to connect additional systems to LUNA-1.
+The server requires:
 
-Before authorization can be granted, the station's first server must pass operational readiness testing.
+1. An organized operations workspace.
+2. An automated system report.
+3. A remotely accessible station information page.
+4. A backup copy of its latest report.
+5. Verified remote administration.
 
-Your server must satisfy every requirement below.
+Your assignment is to build them.
 
-Requirements
+---
 
-Server
+# PROJECT REQUIREMENTS
 
-Your VM must:
-
-Be named LUNA-1.
-
-Run Ubuntu Server.
-
-Have at least 2 GB RAM.
-
-Have at least 20 GB virtual storage.
-
-Successfully boot without installation media.
-
-Identity
-
-The Linux hostname must be:
-
-luna-1
-
-You must have a standard administrative user.
-
-Recommended:
-
-lunaadmin
-
-Directory Structure
+## 1 — Build the Operations Workspace
 
 Inside your home directory, create:
 
-luna/
-├── logs/
+```text
+luna-ops/
 ├── reports/
+├── backups/
 ├── scripts/
-└── telemetry/
+└── station/
+```
 
-Status File
+You decide which Linux commands to use.
+
+---
+
+# 2 — Create the Station Configuration File
 
 Create:
 
-~/luna/reports/system-info.txt
+```text
+~/luna-ops/station/station-info.txt
+```
 
 It must contain:
 
-PROJECT LUNA
-NODE: luna-1
+```text
+PROJECT: LUNA
+STATION: LUNA-1
+ROLE: COMMAND SERVER
+LOCATION: LUNAR SURFACE
 STATUS: OPERATIONAL
+```
 
-Add the server's current IP address.
+---
 
-Add the date you completed Mission 01.
-
-Script
+# 3 — Build the Operations Report Script
 
 Create:
 
-~/luna/scripts/status.sh
+```text
+~/luna-ops/scripts/generate-report.sh
+```
 
-Running it must display:
+The script must automatically generate:
 
-==============================
-       LUNA-1 STATUS
-==============================
+```text
+~/luna-ops/reports/latest-report.txt
+```
+
+The report must contain:
+
+```text
+================================
+       LUNA-1 SYSTEM REPORT
+================================
+
 Hostname:
-<your hostname>
+<actual hostname>
 
-Current User:
-<your username>
+Engineer:
+<actual Linux user>
 
-IP Address:
-<your IP>
+Report Generated:
+<actual current date/time>
 
-Uptime:
-<system uptime>
+IP Configuration:
+<actual IP information>
+
+System Uptime:
+<actual uptime>
 
 Disk Usage:
-<disk information>
-==============================
+<actual disk information>
 
-You will need to research commands capable of displaying this information.
-
-Do not simply hard-code the answers.
-
-The script should obtain information from the operating system.
-
-Make the script executable.
-
-SSH
-
-Mission Control must be able to SSH into LUNA-1 from the host computer.
-
-HTTP
-
-Nginx must be installed and running.
-
-Opening:
-
-http://YOUR-LUNA-IP
-
-from your host computer must display a webpage containing:
-
-LUNA-1 COMMAND SERVER
+================================
 STATUS: OPERATIONAL
+================================
+```
+
+You have already learned all syntax required to accomplish this.
+
+Your script will likely use concepts such as:
+
+```bash
+echo
+$(command)
+>
+>>
+```
+
+along with Linux commands from this mission.
+
+Do not manually type your current hostname, username, uptime, IP address, date, or disk usage into the report.
+
+The script must retrieve them from the system.
+
+---
+
+# 4 — Make the Script Executable
+
+This must work:
+
+```bash
+~/luna-ops/scripts/generate-report.sh
+```
+
+Running it must create or update:
+
+```text
+~/luna-ops/reports/latest-report.txt
+```
+
+---
+
+# 5 — Create a Backup
+
+After generating the report, create a copy at:
+
+```text
+~/luna-ops/backups/report-backup.txt
+```
+
+Mission Control does not care whether you perform the copy manually or include it in your script.
+
+However, automating it earns you imaginary lunar-engineer bonus points.
+
+---
+
+# 6 — Build the LUNA Operations Webpage
+
+Your existing default training webpage is no longer sufficient.
+
+Replace it with an **Operations Node** page.
+
+The webpage must display at least:
+
+```text
+LUNA-1 OPERATIONS NODE
+
+SERVER STATUS: OPERATIONAL
+
+SERVICES:
+SSH: ONLINE
+HTTP: ONLINE
+
+MISSION:
+PROJECT LUNA
+```
 
 You may customize the page however you want.
 
-Services
+You are not being graded on web design.
 
-Both of these must be running:
+The objective is to demonstrate that you understand:
 
-ssh
-nginx
+- Where Nginx serves files from
+- How to edit those files
+- How to access the service remotely
 
-Snapshot
+---
 
-Create a VirtualBox snapshot after completing the project.
+# 7 — Add One Piece of Dynamic Information Manually
 
-Name it:
+Add the server's current IP address to the webpage.
 
-M01 COMPLETE
+Example:
 
-Evidence
+```text
+CURRENT NODE ADDRESS: 192.168.1.50
+```
 
-Save screenshots showing:
+At this stage, it is acceptable for this value to be entered manually.
 
-Successful SSH login.
+Automatically generating webpages comes later.
 
-status.sh running.
+---
 
-systemctl status nginx.
+# 8 — Verify Remote Administration
 
-LUNA-1 status page in your host browser.
+From Earth Mission Control, successfully:
 
-Later, these can become part of your project documentation.
+1. Ping LUNA-1.
+2. SSH into LUNA-1.
+3. Run your report-generation script remotely.
+4. Display the generated report using:
 
-Completion Condition
+```bash
+cat
+```
 
-Do not open COMPLETE.md until:
+5. Check Nginx's service status.
+6. Exit the SSH session.
 
-The project requirements are complete.
+The VM console should not be required for these steps.
 
-You have completed the incident.
+---
 
-You have completed the knowledge check.
+# 9 — Verify the Web Service
 
-Proceed to:
+From Earth Mission Control:
 
+Open:
+
+```text
+http://YOUR-LUNA-IP
+```
+
+Verify that the Operations Node page appears.
+
+Then from your host terminal, test the same service using:
+
+```text
+curl
+```
+
+or on Windows:
+
+```powershell
+curl.exe http://YOUR-LUNA-IP
+```
+
+---
+
+# 10 — Create the Final Snapshot
+
+After confirming everything works, shut down LUNA-1 cleanly.
+
+Create a VirtualBox snapshot named:
+
+```text
+M01 COMPLETE - OPERATIONS NODE
+```
+
+---
+
+# Required Evidence
+
+Capture screenshots showing:
+
+### Screenshot 1
+
+Your LUNA-1 Operations Node webpage from your host computer.
+
+### Screenshot 2
+
+A successful SSH session.
+
+### Screenshot 3
+
+Your script executing.
+
+### Screenshot 4
+
+The contents of:
+
+```text
+latest-report.txt
+```
+
+### Screenshot 5
+
+Nginx shown as:
+
+```text
+active (running)
+```
+
+---
+
+# Self-Check
+
+Before moving forward, verify:
+
+```text
+[ ] LUNA-1 boots normally
+
+[ ] SSH works from Earth Mission Control
+
+[ ] Nginx is running
+
+[ ] Operations Node page loads remotely
+
+[ ] luna-ops directory structure exists
+
+[ ] generate-report.sh exists
+
+[ ] Script is executable
+
+[ ] Script retrieves real system information
+
+[ ] latest-report.txt is generated
+
+[ ] Backup report exists
+
+[ ] Final VM snapshot exists
+```
+
+---
+
+# Important
+
+You are not supposed to remember every command perfectly.
+
+Use your documentation.
+
+What matters is whether you can take a requirement such as:
+
+> "Create an executable script that records disk usage."
+
+and connect it to skills you already learned:
+
+```text
+Create file
++
+Bash
++
+df
++
+redirection
++
+permissions
+```
+
+That is the difference between following a tutorial and applying a skill.
+
+---
+
+When the project is complete, proceed to:
+
+```text
 ../incidents/INCIDENT-01.md
+```
