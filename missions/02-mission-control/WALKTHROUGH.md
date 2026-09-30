@@ -353,24 +353,97 @@ You should now have several commits that each describe one meaningful change.
 
 ---
 
-# PART 8 — `.gitignore`
+# PART 8 — CREATE A `.gitignore` FILE
 
-Not every file belongs in version control.
+Not every file in a project should be tracked by Git.
 
-Examples may include:
+Some files are temporary, generated automatically, or may contain information that should stay local to your computer.
 
-- Temporary files
-- Local credentials
-- Build output
-- Cache directories
-- Logs
-- Large generated data
-
-Create:
+Git provides a special file called:
 
 ```text
 .gitignore
 ```
+
+This is a **text file** that tells Git which files and folders it should normally ignore.
+
+The period at the beginning is part of the filename.
+
+It is:
+
+```text
+.gitignore
+```
+
+not:
+
+```text
+gitignore
+```
+
+and not:
+
+```text
+.gitignore\
+```
+
+---
+
+# Step 1 — Create the File
+
+Make sure you are still inside your:
+
+```text
+luna-git-training
+```
+
+repository.
+
+Check:
+
+```bat
+cd
+```
+
+and:
+
+```bat
+git status
+```
+
+Now create a new file named:
+
+```text
+.gitignore
+```
+
+You can create it using VS Code:
+
+1. Open your `luna-git-training` folder in VS Code.
+2. In the Explorer panel, right-click the repository folder.
+3. Click **New File**.
+4. Enter:
+
+```text
+.gitignore
+```
+
+5. Press Enter.
+
+You should now have something like:
+
+```text
+luna-git-training/
+├── .gitignore
+├── README.md
+└── docs/
+```
+
+---
+
+# Step 2 — Add Ignore Rules
+
+Open `.gitignore`.
 
 Add:
 
@@ -381,12 +454,129 @@ Add:
 secrets/
 ```
 
-Save it.
+Save the file.
 
-Now create:
+Each line is an ignore rule.
+
+---
+
+# What These Rules Mean
+
+This line:
+
+```text
+*.log
+```
+
+means:
+
+> Ignore files whose names end in `.log`.
+
+Examples:
+
+```text
+system.log
+error.log
+nginx.log
+```
+
+This:
+
+```text
+*.tmp
+```
+
+ignores temporary files such as:
+
+```text
+test.tmp
+cache.tmp
+```
+
+This:
+
+```text
+.env
+```
+
+ignores a file specifically named:
+
+```text
+.env
+```
+
+These files are commonly used later to store local configuration or environment variables.
+
+This:
+
+```text
+secrets/
+```
+
+ignores a **folder** named:
+
+```text
+secrets
+```
+
+and the files inside it.
+
+Notice the difference:
+
+```text
+.gitignore
+```
+
+is the actual ignore-rules file.
+
+Inside that file, a rule ending with `/` usually refers to a directory.
+
+---
+
+# Step 3 — Test the Ignore Rules
+
+Create a test log file.
+
+From Command Prompt:
 
 ```bat
 echo TEST LOG> test.log
+```
+
+Check:
+
+```bat
+git status
+```
+
+You should see `.gitignore` as a new file.
+
+You should **not** see:
+
+```text
+test.log
+```
+
+Git is ignoring it because of:
+
+```text
+*.log
+```
+
+---
+
+# Step 4 — Test an Ignored Folder
+
+Create:
+
+```bat
+mkdir secrets
+```
+
+Inside it, create:
+
+```bat
+echo fake-example-password> secrets\password.txt
 ```
 
 Run:
@@ -395,32 +585,111 @@ Run:
 git status
 ```
 
-`test.log` should not appear as an untracked file.
+The `secrets` folder and its contents should not appear as untracked files.
 
-Commit the ignore rules:
-
-```bat
-git add .gitignore
-git commit -m "Add repository ignore rules"
-```
+> The example password is intentionally fake. Never put real passwords or secrets into training files.
 
 ---
 
-# IMPORTANT — `.gitignore` IS NOT SECURITY
+# Step 5 — Commit `.gitignore`
 
-A `.gitignore` file helps prevent accidental tracking.
+The `.gitignore` file itself **should** be tracked by Git.
 
-It does not erase secrets that were already committed.
+Stage it:
+
+```bat
+git add .gitignore
+```
+
+Commit:
+
+```bat
+git commit -m "Add repository ignore rules"
+```
+
+Check:
+
+```bat
+git status
+```
+
+You should have a clean working tree.
+
+---
+
+# Important — `.gitignore` Does Not Delete Files
+
+The ignored files still exist on your computer.
+
+For example:
+
+```text
+test.log
+```
+
+still exists.
+
+Git is simply choosing not to track it.
+
+Verify:
+
+```bat
+dir
+```
+
+You should still see the file.
+
+---
+
+# Important — `.gitignore` Is Not Security
+
+This is extremely important.
+
+`.gitignore` helps prevent files from being accidentally added to Git.
+
+It does **not** make files secret.
+
+It does **not** encrypt them.
+
+It does **not** protect a password that was already committed.
 
 Never intentionally commit:
 
 - Passwords
 - API keys
 - Access tokens
-- Private keys
+- Private SSH keys
 - Real confidential information
 
-Later missions will discuss secrets in greater depth.
+If something sensitive was already committed, adding it to `.gitignore` afterward does not erase it from Git history.
+
+You will learn more about secrets and credential handling later in Project LUNA.
+
+---
+
+# Checkpoint
+
+You should now understand the difference between:
+
+```text
+.gitignore
+```
+
+A file containing ignore rules.
+
+and:
+
+```text
+secrets/
+```
+
+An example folder that `.gitignore` has been told not to track.
+
+Your repository should now contain a tracked `.gitignore` file while Git ignores files such as:
+
+```text
+test.log
+```
 
 ---
 
