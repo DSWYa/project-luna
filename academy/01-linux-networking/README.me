@@ -1,0 +1,523 @@
+ACADEMY 01 — LINUX, NETWORKING & VIRTUALIZATION
+
+Mission 01 introduces three foundations that will appear throughout Project LUNA:
+
+Linux
+
+Networking
+
+Virtualization
+
+This chapter exists as a reference. You can return to it throughout the bootcamp.
+
+1. What Is an Operating System?
+
+An operating system manages the relationship between applications and computer hardware.
+
+Examples include:
+
+Windows
+
+Linux
+
+macOS
+
+Android
+
+iOS
+
+Applications generally do not directly control your processor, RAM, storage devices, or network card.
+
+The operating system manages those resources.
+
+Think of it like a lunar base administrator.
+
+Different teams request:
+
+"I need storage."
+
+"I need memory."
+
+"I need network access."
+
+The operating system coordinates those requests.
+
+2. What Is Linux?
+
+Linux technically refers to the Linux kernel, but people commonly use "Linux" to describe operating systems built around it.
+
+Different packaged versions of Linux are called distributions, or distros.
+
+Examples include:
+
+Ubuntu
+
+Debian
+
+Fedora
+
+Arch Linux
+
+Linux Mint
+
+Kali Linux
+
+Rocky Linux
+
+Project LUNA uses Ubuntu Server.
+
+Server editions generally avoid unnecessary graphical interfaces.
+
+You interact with them mainly through the terminal.
+
+This may initially feel restrictive.
+
+Eventually, it becomes faster.
+
+3. What Is Virtualization?
+
+Normally:
+
+Applications
+     │
+Operating System
+     │
+Hardware
+
+With virtualization:
+
+          Physical Computer
+                 │
+        Host Operating System
+                 │
+             Hypervisor
+          ┌──────┴──────┐
+          ▼             ▼
+       VM #1          VM #2
+      Linux          Windows
+
+The hypervisor provides virtual hardware to virtual machines.
+
+Project LUNA uses VirtualBox.
+
+Each VM receives simulated resources such as:
+
+CPU cores
+
+RAM
+
+Storage
+
+Network adapters
+
+Those resources ultimately come from your physical computer.
+
+Giving a VM 4 GB of RAM does not magically create memory.
+
+It reserves some of your existing RAM while the VM runs.
+
+4. Linux Filesystem Basics
+
+Windows commonly uses drive letters:
+
+C:\
+D:\
+
+Linux organizes files beneath a single root:
+
+/
+
+Common directories include:
+
+/
+├── home
+├── etc
+├── var
+├── usr
+├── tmp
+└── root
+
+Some especially important locations:
+
+/home
+
+Normal users' home directories.
+
+/etc
+
+System configuration files.
+
+/var
+
+Frequently changing data such as logs.
+
+/tmp
+
+Temporary files.
+
+/root
+
+Home directory for the root administrative account.
+
+5. Essential Linux Commands
+
+Print your current location:
+
+pwd
+
+List files:
+
+ls
+
+Detailed listing:
+
+ls -la
+
+Change directories:
+
+cd directory-name
+
+Go home:
+
+cd ~
+
+Go up one directory:
+
+cd ..
+
+Create directory:
+
+mkdir example
+
+Create empty file:
+
+touch example.txt
+
+Copy:
+
+cp source destination
+
+Move or rename:
+
+mv old-name new-name
+
+Delete file:
+
+rm filename
+
+Delete directory:
+
+rm -r directory
+
+Display file:
+
+cat filename
+
+Edit using Nano:
+
+nano filename
+
+6. Users and sudo
+
+Linux uses accounts and permissions to control access.
+
+Check your current user:
+
+whoami
+
+Some operations require administrative privileges.
+
+Instead of permanently working as the administrator, Linux commonly uses:
+
+sudo
+
+For example:
+
+sudo apt update
+
+You can think of sudo as:
+
+"Run this specific command with administrative authority."
+
+This reduces the need to operate as the all-powerful root user constantly.
+
+7. Packages
+
+Linux software is commonly installed using package managers.
+
+Ubuntu uses APT.
+
+Refresh available package information:
+
+sudo apt update
+
+Install updates:
+
+sudo apt upgrade
+
+Install software:
+
+sudo apt install PACKAGE
+
+Remove software:
+
+sudo apt remove PACKAGE
+
+8. Processes
+
+A program is stored code.
+
+A process is a running instance of a program.
+
+View processes:
+
+ps
+
+More detailed:
+
+ps aux
+
+Interactive process viewer:
+
+top
+
+Press:
+
+q
+
+to exit top.
+
+9. Services
+
+Servers frequently run programs continuously in the background.
+
+These are often managed as services.
+
+Ubuntu commonly uses systemd.
+
+Check a service:
+
+systemctl status SERVICE
+
+Start:
+
+sudo systemctl start SERVICE
+
+Stop:
+
+sudo systemctl stop SERVICE
+
+Restart:
+
+sudo systemctl restart SERVICE
+
+Enable during boot:
+
+sudo systemctl enable SERVICE
+
+10. Networking Basics
+
+Devices need a way to identify and communicate with each other.
+
+IP Address
+
+An IPv4 address might look like:
+
+192.168.1.25
+
+It identifies a network interface on an IP network.
+
+Subnet
+
+A subnet determines which addresses are considered part of the local network.
+
+You may see:
+
+192.168.1.25/24
+
+The /24 represents the network prefix length.
+
+Default Gateway
+
+The default gateway is generally the router used when traffic needs to leave the local network.
+
+DNS
+
+Humans prefer:
+
+google.com
+
+Computers ultimately communicate using IP addresses.
+
+DNS translates names into addresses.
+
+Think of DNS as a phonebook.
+
+Ports
+
+An IP address identifies a system.
+
+A port helps identify the application/service on that system.
+
+Common examples:
+
+22   SSH
+53   DNS
+80   HTTP
+443  HTTPS
+
+11. TCP and UDP
+
+Two major transport protocols are TCP and UDP.
+
+TCP
+
+TCP emphasizes reliable, ordered delivery.
+
+Common examples include:
+
+SSH
+
+HTTP
+
+HTTPS
+
+UDP
+
+UDP avoids much of TCP's connection and reliability overhead.
+
+It is useful when low latency or simplicity matters more than guaranteed delivery.
+
+DNS often uses UDP for ordinary queries.
+
+Do not think:
+
+TCP = good
+UDP = bad
+
+They solve different problems.
+
+12. Useful Network Commands
+
+Show interfaces and addresses:
+
+ip addr
+
+Shorter:
+
+ip a
+
+Show routes:
+
+ip route
+
+Test reachability:
+
+ping ADDRESS
+
+Example:
+
+ping 8.8.8.8
+
+Stop using:
+
+Ctrl + C
+
+Query DNS:
+
+nslookup example.com
+
+If nslookup is unavailable:
+
+sudo apt install dnsutils
+
+Make an HTTP request:
+
+curl http://ADDRESS
+
+13. Client and Server
+
+A server provides a resource or service.
+
+A client requests it.
+
+Example:
+
+Browser                 Web Server
+ CLIENT  ─── HTTP ───►  SERVER
+
+Your browser is the client.
+
+The web server responds.
+
+One machine can simultaneously act as both client and server depending on what it is doing.
+
+14. SSH
+
+SSH stands for Secure Shell.
+
+SSH allows secure remote administration of another computer.
+
+Typical syntax:
+
+ssh username@server-address
+
+Example:
+
+ssh lunaadmin@192.168.1.50
+
+SSH normally uses TCP port:
+
+22
+
+Once connected, commands are executing on the remote system.
+
+Always pay attention to which computer your terminal currently controls.
+
+15. Troubleshooting Philosophy
+
+Do not randomly change settings.
+
+Work through layers.
+
+For example, if you cannot reach a website hosted by your server:
+
+Is the VM running?
+
+If no, networking is irrelevant.
+
+Does the server have an IP address?
+
+Use:
+
+ip a
+
+Can the host reach the server?
+
+Try:
+
+ping
+
+Is the service running?
+
+Use:
+
+systemctl status
+
+Is it listening?
+
+Check network connections.
+
+Can the server reach itself?
+
+Use:
+
+curl localhost
+
+Can the host reach the service?
+
+Try the browser or curl.
+
+Good troubleshooting moves from broad questions toward specific ones.
+
+That methodology will appear throughout Project LUNA.
