@@ -1131,10 +1131,10 @@ A link:
 A table:
 
 ```markdown
-| Service | Port | Status |
-|---|---:|---|
-| SSH | 22 | Online |
-| HTTP | 80 | Online |
+|Service|Port| Status |
+|---    |---:|---     |
+| SSH   | 22 | Online |
+| HTTP  | 80 | Online |
 ```
 
 A checkbox:
